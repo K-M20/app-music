@@ -1,0 +1,43 @@
+  <nav class="navbar navbar-expand-lg navbar-light">
+    <app-search (searchAlbums)="search($event)"></app-search>
+  </nav>
+
+<div class="row content">
+  <div class="col-sm-4 video">
+    <!-- AlbumDetails -->
+    <app-album-details [album]="selectedAlbum" (onPlay)="playParent($event)"></app-album-details>
+  </div>
+  <!-- .video -->
+  <div class="col-sm-4 music">
+    <h1>{{ titlePage }}</h1>
+    <!-- Pagination -->
+    <div class="card card-selected" *ngFor="let album of albums">
+      <div class="card-header">
+        {{album.ref}}
+      </div>
+      <div class="card-body">
+        <h5 class="card-title" >{{album.title}}<span *ngIf="albumPlaying == album.id"> - Album currently played</span></h5>
+        <p class="card-text">{{album.description}}</p>
+        <ul *ngIf="album.tags" class="list-inline">
+          <li class="list-inline-item" *ngFor="let word of album.tags">
+            <span class="badge badge-info text-primary">{{ word }}</span>
+          </li>
+        </ul>
+        <a class="btn btn-outline-dark" href="#" role="button">en</a>
+        <ng-template [ngIf]="album.like">
+          <img class="glyph-icon" src="./assets/svg/si-glyph-heart.svg" />
+          <small>{{ album.like }}</small>
+        </ng-template>
+        <ng-template [ngIf]="album.duration">
+          <img class="glyph-icon" src="./assets/svg/si-glyph-timer.svg" />
+          <small>{{album.duration}} min</small>
+        </ng-template>
+	<!-- bouton permettant de sélectionner un album -->
+        <button (click)="onSelect(album)" class="btn btn-dark">Details</button>
+      </div>
+    </div>
+    <!-- .card -->
+    <!-- Pagination -->
+  </div>
+  <!-- .music -->
+</div>
