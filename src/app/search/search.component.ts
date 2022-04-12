@@ -13,16 +13,15 @@ export class SearchComponent implements OnInit {
 
   @Output() searchAlbums: EventEmitter<Album[]> = new EventEmitter(); // émission des données vers le parent
 
-  constructor(private ablumService: AlbumService) { }
+  constructor(private albumService: AlbumService) { }
 
   ngOnInit(): void {
   }
 
   onSubmit(form: NgForm): void {
     // récupération des données du formulaire
-    let results = this.ablumService.search(form.value['word']);
+    let results = this.albumService.search(form.value['word']);
     if (results.length > 0) this.searchAlbums.emit(results);
     console.log(results);
-
   }
 }
