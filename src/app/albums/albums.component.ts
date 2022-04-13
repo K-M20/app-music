@@ -15,15 +15,24 @@ export class AlbumsComponent implements OnInit {
   albums: Album[] = ALBUMS;
   selectedAlbum: Album = new Album;
   status: string | null = null;
+  count: any;
 
   albumPlaying: number | string = 0;
 
   constructor(private albumService: AlbumService) {
-    console.log(this.albumService.count());
+    // console.log(this.albumService.count());
+    // récupération des données depuis Firebase avec la méthode HttpClient
+    console.log(this.albumService.getAlbums().subscribe(
+      albums => console.log('-*-*-*-*---*', albums)
+    ))
   }
 
   ngOnInit(): void {
-    this.albums = this.albumService.paginate(0, 2);
+    // this.albums = this.albumService.paginate(0, 2);
+    this.albumService.paginate(0, 5).subscribe(albums => this.albums = albums);
+    this.count = this.albumService.count().subscribe(
+      count => this.count = count
+    );
   }
 
   onSelect(album: Album) {
@@ -45,8 +54,11 @@ export class AlbumsComponent implements OnInit {
   currentPage: number = 1;
 
   paginate(album: { start: number, end: number, currentPage: number }) {
-    this.albums = this.albumService.paginate(album.start, album.end);
     this.currentPage = album.currentPage;
+    // this.albums = this.albumService.paginate(album.start, album.end);
+    this.albumService.paginate(album.start, album.end).subscribe(
+      albums => this.albums = albums
+    )
   }
 
 }

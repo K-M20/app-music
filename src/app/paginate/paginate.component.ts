@@ -29,13 +29,14 @@ export class PaginateComponent implements OnInit {
    * @param page
    */
   init(page: number = 1) {
-    this.total = this.aS.count();
-    this.numberPages = Math.ceil(this.total / this.perPage);
-    this.currentPage = page;
-    this.pages = [];
-    for (let i = 1; i < this.numberPages + 1; i++) {
-      this.pages.push(i);
-    }
+    this.aS.count().subscribe(count => {
+      this.numberPages = Math.ceil(count / this.perPage);
+      this.currentPage = page;
+      this.pages = [];
+      for (let i = 1; i < this.numberPages + 1; i++) {
+        this.pages.push(i);
+      }
+    })
   }
 
   selectedPage(page: number) {

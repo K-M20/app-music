@@ -12,8 +12,13 @@ import { DescriptionComponent } from './description/description.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { PaginateComponent } from './paginate/paginate.component';
 import { AudioPlayerComponent } from './audio-player/audio-player.component';
+import { HttpClientModule } from '@angular/common/http';
+import { provideFirebaseApp, getApp, initializeApp } from '@angular/fire/app';
+import { getFirestore, provideFirestore } from '@angular/fire/firestore';
+import { environment } from 'src/environments/environment';
 
 
+const app = initializeApp(environment.firebaseConfig);
 
 
 
@@ -56,7 +61,10 @@ const albumsRoutes: Routes = [
     BrowserModule,
     FormsModule,
     RouterModule.forRoot(albumsRoutes),
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    HttpClientModule,
+    provideFirebaseApp(() => initializeApp(environment.firebaseConfig)),
+    provideFirestore(() => getFirestore()),
   ],
   providers: [],
   bootstrap: [AppComponent]

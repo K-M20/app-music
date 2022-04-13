@@ -18,6 +18,7 @@ export class DescriptionComponent implements OnInit {
   ngOnInit(): void {
     const id = this.route.snapshot.paramMap.get('id');
     if (id)
-      this.album = this.aS.getAlbum(id);
+      // this.album = this.aS.getAlbum(id);
+      this.aS.getAlbum(id).subscribe(album => this.album = album);
   }
 }

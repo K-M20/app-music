@@ -20,8 +20,13 @@ export class SearchComponent implements OnInit {
 
   onSubmit(form: NgForm): void {
     // récupération des données du formulaire
-    let results = this.albumService.search(form.value['word']);
-    if (results.length > 0) this.searchAlbums.emit(results);
-    console.log(results);
+    // let results = this.albumService.search(form.value['word']);
+    // if (results.length > 0) this.searchAlbums.emit(results);
+    // console.log(results);
+    this.albumService.search(form.value['word']).subscribe(
+      albums => {
+        if (albums.length > 0) this.searchAlbums.emit(albums);
+      }
+    )
   }
 }
