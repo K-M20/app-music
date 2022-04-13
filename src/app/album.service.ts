@@ -132,16 +132,17 @@ export class AlbumService {
   }
 
   // Audio-player 
-  switchOn(album: Album) {
 
+  switchOn(album: Album) {
     this._albums.forEach(
       a => {
-        if (a.ref === album.ref) album.status = 'on';
-        else
+        if (a.ref === album.ref) { album.status = 'on'; }
+        else {
           a.status = 'off';
+        }
       }
     );
-    this.subjectAlbum.next(album);
+    this.subjectAlbum.next(album); // Observer puscher les informations
   }
 
   switchOff(album: Album) {

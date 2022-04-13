@@ -18,7 +18,7 @@ import { getFirestore, provideFirestore } from '@angular/fire/firestore';
 import { environment } from 'src/environments/environment';
 
 
-const app = initializeApp(environment.firebaseConfig);
+// const app = initializeApp(environment.firebaseConfig);
 
 
 
