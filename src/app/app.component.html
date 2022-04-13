@@ -1,3 +1,39 @@
-<div class="container-fluid principal">
-<app-albums></app-albums>
+<div class="container-fuild principal">
+  <nav class="navbar navbar-expand-lg navbar-light">
+      <a class="navbar-brand">{{ title }}</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup"
+          aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+          <ul class="navbar-nav mr-auto">
+              <li class="nav-item active">
+                  <a class="nav-link" routerLink="/albums">Home
+                  </a>
+              </li>
+              <li class="nav-item active">
+                  <a class="nav-link" routerLink="/login" routerLinkActive="active">
+                      Se connecter
+                  </a>
+              </li>
+              <ng-template>
+                  <li class="nav-item active">
+                      <a class="nav-link" routerLink="/dashboard" routerLinkActive="active">
+                          Dashboard
+                      </a>
+                  </li>
+                  <li class="nav-item active">
+                      <a class="nav-link">
+                          logout
+                      </a>
+                  </li>
+              </ng-template>
+          </ul>
+          <ul class="offset-8">  
+              <li>time :  {{ time }}</li>
+          </ul>
+      </div>
+  </nav>
+  <app-audio-player></app-audio-player>
+  <router-outlet></router-outlet>
 </div>

@@ -1,4 +1,6 @@
 import { Injectable } from '@angular/core';
+import { Subject } from 'rxjs';
+import { environment } from 'src/environments/environment';
 import { Album, List } from './album';
 import { ALBUM_LISTS, ALBUMS } from './mock-albums';
 
@@ -10,6 +12,9 @@ export class AlbumService {
 
   private _albums: Album[] = ALBUMS; // _ convention private et protected
   private _albumList: List[] = ALBUM_LISTS;
+
+  sendCurrentNumberPage = new Subject<number>();
+  subjectAlbum = new Subject<Album>();
 
   getAlbums(): Album[] {
     return this._albums.sort(
@@ -30,8 +35,6 @@ export class AlbumService {
   }
 
   paginate(start: number, end: number): Album[] {
-
-    // utilisez la méthode slice pour la pagination
     return this._albums.sort(
       (a, b) => { return b.duration - a.duration }
     ).slice(start, end);
@@ -39,6 +42,31 @@ export class AlbumService {
 
   search(word: string): Album[] {
     return this._albums.filter(album => album.title.includes(word));
+  }
+
+  currentPage(page: number) {
+    return this.sendCurrentNumberPage.next(page);
+  }
+
+  // Audio-player 
+  switchOn(album: Album) {
+
+    this._albums.forEach(
+      a => {
+        if (a.ref === album.ref) album.status = 'on';
+        else
+          a.status = 'off';
+      }
+    );
+    this.subjectAlbum.next(album);
+  }
+
+  switchOff(album: Album) {
+    this._albums.forEach(
+      a => {
+        a.status = 'off';
+      }
+    );
   }
 
   constructor() { }
