@@ -17,8 +17,8 @@ const httpOptions = {
 })
 export class AlbumService {
 
-  private _albums: Album[] = ALBUMS; // _ convention private et protected
-  private _albumList: List[] = ALBUM_LISTS;
+  // private _albums: Album[] = ALBUMS; // _ convention private et protected. Utilisé uniquement si j'utilise mock albums iso bdd firebase
+  // private _albumList: List[] = ALBUM_LISTS;              Utilisé uniquement si j'utilise mock albums iso bdd firebase
 
   sendCurrentNumberPage = new Subject<number>();
 
@@ -40,7 +40,7 @@ export class AlbumService {
       // Préparation des données avec _.values pour avoir un format exploitable dans l'applimap(albums => _.values(albums)),
       // Ordonnez les albums par ordre de durées décroissantes
       map(albums => {
-        return this._albums.sort(
+        return albums.sort(
           (a, b) => { return b.duration - a.duration }
         );
       })
