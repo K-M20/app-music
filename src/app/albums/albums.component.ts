@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { Album } from '../album';
 import { ALBUMS } from '../mock-albums';
 import { AlbumService } from '../album.service';
@@ -17,6 +17,7 @@ export class AlbumsComponent implements OnInit {
   status: string | null = null;
   count: any;
 
+  @ViewChild('paginator') paginator: any;
   albumPlaying: number | string = 0;
 
   constructor(private albumService: AlbumService) {
@@ -29,7 +30,7 @@ export class AlbumsComponent implements OnInit {
 
   ngOnInit(): void {
     // this.albums = this.albumService.paginate(0, 2);
-    this.albumService.paginate(0, 5).subscribe(albums => this.albums = albums);
+    this.albumService.paginate(0, this.paginator.perPage).subscribe(albums => this.albums = albums, error => console.log(error));
     this.count = this.albumService.count().subscribe(
       count => this.count = count
     );

@@ -7,7 +7,7 @@
     <div class="col-sm-4 music">
       <h1>{{ titlePage }}</h1>
       <!-- Pagination -->
-      <app-paginate (setPaginate)="paginate($event)" [currentPage]="currentPage"></app-paginate>
+      <app-paginate (setPaginate)="paginate($event)" [currentPage]="currentPage" #paginator></app-paginate>
       <div class="card" *ngFor="let album of albums">
         <div class="card-header">
             <h5 class="card-title" ><a class="text-info" routerLink="/album/{{album.id}}">{{album.title}}</a><span *ngIf="albumPlaying == album.id"> - Album currently played</span></h5>

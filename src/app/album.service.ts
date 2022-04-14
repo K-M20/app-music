@@ -24,8 +24,8 @@ export class AlbumService {
 
   subjectAlbum = new Subject<Album>();
 
-  private albumsUrl = 'https://[https://app-music-92a73-default-rtdb.europe-west1.firebasedatabase.app/]-default-rtdb.europe-west1.firebasedatabase.app/albums';
-  private albumListsUrl = 'https://[https://app-music-92a73-default-rtdb.europe-west1.firebasedatabase.app/]-default-rtdb.europe-west1.firebasedatabase.app/albumLists';
+  private albumsUrl = 'https://app-music-92a73-default-rtdb.europe-west1.firebasedatabase.app/albums';
+  private albumListsUrl = 'https://app-music-92a73-default-rtdb.europe-west1.firebasedatabase.app/albumLists';
 
   constructor(private http: HttpClient) { }
 
@@ -88,17 +88,6 @@ export class AlbumService {
 
     // Vous devez faire le mapping avant la récupération des données
     return this.http.get<Album[]>(this.albumsUrl + '/.json', httpOptions).pipe(
-      // Préparation des données pour avoir un format exploitable dans l'application
-      // JSON en Array JSON
-      map(albums => {
-        let Albums: Album[] = [];
-        albums.forEach((v: Album, k: any) => {
-          v.id = k;
-          Albums.push(v);
-        });
-
-        return Albums;
-      }),
       // Ordonner les albums par ordre de durée décroissante
       map(albums => {
         return albums.sort(
