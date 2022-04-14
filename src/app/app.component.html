@@ -1,39 +1,31 @@
 <div class="container-fuild principal">
-  <nav class="navbar navbar-expand-lg navbar-light">
-      <a class="navbar-brand">{{ title }}</a>
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup"
-          aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
+  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="#">{{title}}</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
       </button>
-      <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-          <ul class="navbar-nav mr-auto">
-              <li class="nav-item active">
-                  <a class="nav-link" routerLink="/albums">Home
-                  </a>
-              </li>
-              <li class="nav-item active">
-                  <a class="nav-link" routerLink="/login" routerLinkActive="active">
-                      Se connecter
-                  </a>
-              </li>
-              <ng-template>
-                  <li class="nav-item active">
-                      <a class="nav-link" routerLink="/dashboard" routerLinkActive="active">
-                          Dashboard
-                      </a>
-                  </li>
-                  <li class="nav-item active">
-                      <a class="nav-link">
-                          logout
-                      </a>
-                  </li>
-              </ng-template>
-          </ul>
-          <ul class="offset-8">  
-              <li>time :  {{ time }}</li>
-          </ul>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" routerLink="/albums">Home</a>
+          </li>
+          <li *ngIf="auth.authenticated()==true" class="nav-item">
+            <a class="nav-link active" aria-current="page" routerLink="/dashboard">Dashboard</a>
+          </li>
+          <li *ngIf="auth.authenticated()==false" class="nav-item">
+            <a class="nav-link active" aria-current="page" routerLink="/login" routerLinkActive="active">Se connecter</a>
+          </li>
+          <li *ngIf="auth.authenticated()==true"  class="nav-item">
+            <a class="nav-link disconnect" aria-current="page" (click)="auth.logout()">logout</a>
+          </li>
+        </ul>
+        <ul>
+          <li>time : {{ time }} </li>
+      </ul>
       </div>
+    </div>
   </nav>
   <app-audio-player></app-audio-player>
-  <router-outlet></router-outlet>
 </div>
+<router-outlet></router-outlet>

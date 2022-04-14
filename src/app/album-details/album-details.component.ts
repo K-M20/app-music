@@ -34,7 +34,7 @@ export class AlbumDetailsComponent implements OnInit {
   isOpen: boolean = false;
 
 
-  constructor(private ablumService: AlbumService) { }
+  constructor(private albumService: AlbumService) { }
 
   ngOnInit() {
   }

@@ -13,9 +13,13 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { PaginateComponent } from './paginate/paginate.component';
 import { AudioPlayerComponent } from './audio-player/audio-player.component';
 import { HttpClientModule } from '@angular/common/http';
-import { provideFirebaseApp, getApp, initializeApp } from '@angular/fire/app';
-import { getFirestore, provideFirestore } from '@angular/fire/firestore';
+
 import { environment } from 'src/environments/environment';
+
+import { DashboardComponent } from './dashboard/dashboard.component';
+import { GuardService } from './guard.service';
+import { AngularFireAuthModule } from '@angular/fire/compat/auth';
+import { AngularFireModule } from '@angular/fire/compat';
 
 
 // const app = initializeApp(environment.firebaseConfig);
@@ -43,6 +47,10 @@ const albumsRoutes: Routes = [
   {
     path: 'album/:id',
     component: DescriptionComponent
+  },
+  {
+    path: 'dashboard', canActivate: [GuardService],
+    component: DashboardComponent
   }
 ];
 
@@ -56,6 +64,7 @@ const albumsRoutes: Routes = [
     DescriptionComponent,
     PaginateComponent,
     AudioPlayerComponent,
+    DashboardComponent,
   ],
   imports: [
     BrowserModule,
@@ -63,8 +72,9 @@ const albumsRoutes: Routes = [
     RouterModule.forRoot(albumsRoutes),
     BrowserAnimationsModule,
     HttpClientModule,
-    provideFirebaseApp(() => initializeApp(environment.firebaseConfig)),
-    provideFirestore(() => getFirestore()),
+    AngularFireModule.initializeApp(environment.firebaseConfig),
+    AngularFireAuthModule,
+    AngularFireAuthModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

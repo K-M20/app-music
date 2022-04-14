@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { interval, Observable } from 'rxjs';
 import { take, map } from 'rxjs/operators';
+import { AuthService } from './auth.service';
+
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -9,22 +11,20 @@ import { take, map } from 'rxjs/operators';
 export class AppComponent {
   title = 'app-music';
   time: string = "";
-  count: Observable<number> = new Observable;
 
-  constructor() {
-    this.count = interval(1000);
-    const interval$ = this.count.
+  constructor(public auth: AuthService) {
+    const interval$ = interval(1000).
       pipe(
-        map(num => {
-          const hours = Math.floor(num / 3600);
-          const minutes = Math.floor(num / 60);
-          return `${hours} h ${minutes - hours * 60} min ${num - minutes * 60} s`;
+        map(sec => {
+          let hours = Math.floor(sec / 3600);
+          let minutes = Math.floor(sec / 60);
+          return `${hours} h ${minutes - hours * 60} min ${sec - minutes * 60} s`;
         }),
         take(12 * 60 * 3) // arret a 12 * 3 minutes (specifique a rxjs 6)
       );
 
     interval$.subscribe( // souscription à l'interval subscribe
-      num => this.time = num
+      time => this.time = time
     );
   }
 }

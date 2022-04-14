@@ -21,6 +21,7 @@ export class AlbumService {
   private _albumList: List[] = ALBUM_LISTS;
 
   sendCurrentNumberPage = new Subject<number>();
+
   subjectAlbum = new Subject<Album>();
 
   private albumsUrl = 'https://[https://app-music-92a73-default-rtdb.europe-west1.firebasedatabase.app/]-default-rtdb.europe-west1.firebasedatabase.app/albums';
