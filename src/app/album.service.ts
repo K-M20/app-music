@@ -122,25 +122,18 @@ export class AlbumService {
   }
 
   // Audio-player 
-
-  switchOn(album: Album) {
-    this._albums.forEach(
-      a => {
-        if (a.ref === album.ref) { album.status = 'on'; }
-        else {
-          a.status = 'off';
-        }
-      }
+  switchOn(album: Album): void {
+    album.status = 'on';
+    this.http.put<void>(this.albumsUrl + `/${album.id}/.json`, album).subscribe(() => {
+      this.subjectAlbum.next(album);
+    }
     );
-    this.subjectAlbum.next(album); // Observer puscher les informations
   }
 
-  switchOff(album: Album) {
-    this._albums.forEach(
-      a => {
-        a.status = 'off';
-      }
-    );
+  switchOff(album: Album): void {
+    album.status = 'off';
+    this.http.put<void>(this.albumsUrl + `/${album.id}/.json`, album).subscribe(() => {
+    });
   }
 
 }

@@ -1,7 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { Routes, RouterModule } from '@angular/router';
 
 import { AppComponent } from './app.component';
 import { AlbumsComponent } from './albums/albums.component';
@@ -17,42 +16,12 @@ import { HttpClientModule } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 
 import { DashboardComponent } from './dashboard/dashboard.component';
-import { GuardService } from './guard.service';
 import { AngularFireAuthModule } from '@angular/fire/compat/auth';
 import { AngularFireModule } from '@angular/fire/compat';
-
-
+import { AppRoutingModule } from './app-routing.module';
+import { ShareModule } from './share/share.module';
+import { AdminModule } from './admin/admin.module';
 // const app = initializeApp(environment.firebaseConfig);
-
-
-
-const albumsRoutes: Routes = [
-  {
-    path: '',
-    component: LoginComponent
-  },
-  {
-    path: 'albums',
-    component: AlbumsComponent
-  },
-  {
-    path: 'albums',
-    redirectTo: '/albums',
-    pathMatch: 'full'
-  },
-  {
-    path: 'login',
-    component: LoginComponent
-  },
-  {
-    path: 'album/:id',
-    component: DescriptionComponent
-  },
-  {
-    path: 'dashboard', canActivate: [GuardService],
-    component: DashboardComponent
-  }
-];
 
 @NgModule({
   declarations: [
@@ -62,19 +31,21 @@ const albumsRoutes: Routes = [
     SearchComponent,
     LoginComponent,
     DescriptionComponent,
-    PaginateComponent,
     AudioPlayerComponent,
     DashboardComponent,
   ],
   imports: [
     BrowserModule,
     FormsModule,
-    RouterModule.forRoot(albumsRoutes),
     BrowserAnimationsModule,
     HttpClientModule,
+    AppRoutingModule,
     AngularFireModule.initializeApp(environment.firebaseConfig),
     AngularFireAuthModule,
     AngularFireAuthModule,
+    AppRoutingModule,
+    ShareModule,
+    AdminModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

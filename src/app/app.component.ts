@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
-import { interval, Observable } from 'rxjs';
-import { take, map } from 'rxjs/operators';
+import { interval, Observable, map, take } from 'rxjs';
 import { AuthService } from './auth.service';
 
 @Component({
@@ -10,10 +9,12 @@ import { AuthService } from './auth.service';
 })
 export class AppComponent {
   title = 'app-music';
+  count: Observable<number> | undefined;
   time: string = "";
 
   constructor(public auth: AuthService) {
-    const interval$ = interval(1000).
+    this.count = interval(1000)
+    const interval$ = this.count.
       pipe(
         map(sec => {
           let hours = Math.floor(sec / 3600);
