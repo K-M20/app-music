@@ -8,6 +8,7 @@ import { GuardService } from './guard.service';
 import { LoginComponent } from './login/login.component';
 import { AlbumComponent } from './admin/album/album.component';
 
+
 const albumsRoutes: Routes = [
   {
     path: 'albums',

@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Observable, Subject } from 'rxjs';
 import { Album, List } from './album';
-import { ALBUM_LISTS, ALBUMS } from './mock-albums';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { map } from 'rxjs/operators';
 
@@ -135,5 +134,10 @@ export class AlbumService {
     this.http.put<void>(this.albumsUrl + `/${album.id}/.json`, album).subscribe(() => {
     });
   }
+
+  addAlbum(album: Album): Observable<void> {
+    return this.http.post<void>(this.albumsUrl + '/.json', album);
+  }
+
 
 }
