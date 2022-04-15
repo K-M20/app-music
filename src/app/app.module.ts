@@ -9,7 +9,6 @@ import { SearchComponent } from './search/search.component';
 import { LoginComponent } from './login/login.component';
 import { DescriptionComponent } from './description/description.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { PaginateComponent } from './paginate/paginate.component';
 import { AudioPlayerComponent } from './audio-player/audio-player.component';
 import { HttpClientModule } from '@angular/common/http';
 
@@ -21,6 +20,8 @@ import { AngularFireModule } from '@angular/fire/compat';
 import { AppRoutingModule } from './app-routing.module';
 import { ShareModule } from './share/share.module';
 import { AdminModule } from './admin/admin.module';
+import { ReactiveFormsModule } from '@angular/forms';
+
 // const app = initializeApp(environment.firebaseConfig);
 
 @NgModule({
@@ -46,6 +47,7 @@ import { AdminModule } from './admin/admin.module';
     AppRoutingModule,
     ShareModule,
     AdminModule,
+    ReactiveFormsModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
