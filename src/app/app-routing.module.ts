@@ -7,6 +7,7 @@ import { DescriptionComponent } from './description/description.component';
 import { GuardService } from './guard.service';
 import { LoginComponent } from './login/login.component';
 import { AlbumComponent } from './admin/album/album.component';
+import { AddAlbumComponent } from './admin/addalbum/addalbum.component';
 
 
 const albumsRoutes: Routes = [
